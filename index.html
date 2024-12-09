@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #282c34;
+            color: white;
+        }
+
+        /* Timer Container */
+        .countdown-container {
+            text-align: center;
+        }
+
+        /* Timer Display */
+        .countdown-timer {
+            font-size: 3rem;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            background-color: #444;
+            color: #0ff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Header Style */
+        h1 {
+            font-size: 2rem;
+            color: #0ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <h1>Countdown Timer</h1>
+        <div class="countdown-timer" id="timer">00:00</div>
+    </div>
+    <script>
+        // Get the timer element
+        const countdownElement = document.getElementById('timer');
+
+        // Set target time for countdown (e.g., 5 minutes from now)
+        const targetTime = new Date().getTime() + 5 * 60 * 1000; // 5 minutes in milliseconds
+
+        // Function to update the countdown timer
+        function updateCountdown() {
+            const now = new Date().getTime(); // Current time
+            const distance = targetTime - now; // Time remaining
+
+            if (distance <= 0) {
+                // If countdown is over
+                countdownElement.textContent = "00:00";
+                clearInterval(timerInterval); // Stop the timer
+                alert("Time's up!"); // Notify the user
+                return;
+            }
+
+            // Calculate minutes and seconds
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the timer
+            countdownElement.textContent = ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')};
+        }
+
+        // Update the timer every second
+        const timerInterval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call to display the timer immediately
+    </script>
+</body>
+</html>
+        }
+
